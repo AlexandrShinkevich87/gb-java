@@ -2,8 +2,11 @@ package ru.gb.box;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public class Lesson1Task2 {
+
     public static void main(String[] args) {
         Apple apple = new Apple();
         Orange orange = new Orange();
@@ -34,5 +37,16 @@ public class Lesson1Task2 {
         }
 
         log.info("две коробки равны? {}", boxApple.equals(boxOrange));
+
+        log.info("всыпаем яблоки в нашу коробоку с другой");
+        Box<Apple> otherBoxApple = new Box<>();
+        otherBoxApple.add(List.of(apple, apple, apple, apple));
+        log.info("вес чужой коробки с яблоками ДО персыпания {}", otherBoxApple.getWeight());
+
+        log.info("вес коробки с яблоками ДО персыпания {}", boxApple.getWeight());
+        boxApple.pourFruitFrom(otherBoxApple);
+        log.info("вес коробки с яблоками ПОСЛЕ персыпания {}", boxApple.getWeight());
+        log.info("теперь чужая коробка с яблоками пуста, т.к. вес ее равен {}", otherBoxApple.getWeight());
+
     }
 }

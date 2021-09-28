@@ -1,10 +1,13 @@
 package ru.gb.box;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
+    @Getter
     private List<T> fruits;
 
     public void add(T fruit) {
@@ -22,10 +25,19 @@ public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
     }
 
     float getWeight() {
-        if (fruits == null) {
+        if (fruits == null || fruits.isEmpty()) {
             return 0;
         }
         return this.fruits.get(0).getWeight() * this.fruits.size();
+    }
+
+    public void pourFruitFrom(Box<T> other) {
+        this.add(other.getFruits());
+        other.clear();
+    }
+
+    public void clear() {
+        this.fruits.clear();
     }
 
     @Override
