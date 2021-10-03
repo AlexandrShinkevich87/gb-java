@@ -9,6 +9,9 @@
     </parent>
     <groupId>ru.gb.java.level3</groupId>
     <packaging>pom</packaging>
+    <modules>
+        <module>lesson-2</module>
+    </modules>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>level-3</artifactId>
