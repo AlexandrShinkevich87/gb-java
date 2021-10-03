@@ -1,13 +1,11 @@
 package ru.gb.box;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
-    @Getter
     private List<T> fruits;
 
     public void add(T fruit) {
@@ -56,5 +54,9 @@ public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
     @Override
     public int hashCode() {
         return Objects.hash(fruits);
+    }
+
+    public List<T> getFruits() {
+        return Collections.unmodifiableList(this.fruits);
     }
 }
