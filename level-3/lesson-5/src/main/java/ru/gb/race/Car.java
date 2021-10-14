@@ -26,11 +26,22 @@ public class Car implements Runnable {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
+
+            race.getCyclicBarrier().await();
+            if (!race.isReady()) {
+                race.setReady(true);
+                System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
+        }
+
+        if (!race.isWon()) {
+            race.setWon(true);
+            System.out.println(this.name + " - WIN");
         }
     }
 }
