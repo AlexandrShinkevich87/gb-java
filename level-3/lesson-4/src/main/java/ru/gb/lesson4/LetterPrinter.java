@@ -6,33 +6,36 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LetterPrinter implements Runnable {
 
-    private final char startFromLetter = 'A';
+    private char currentLetterForStart;
 
     private static final int NUMBER_OF_PRINTS = 5;
     private final Object lock = new Object();
 
-    private char currentLetter;
-    private final char nextLetter;
-
-
-    public LetterPrinter(char currentLetter, char nextLetter) {
-        this.currentLetter = currentLetter;
-        this.nextLetter = nextLetter;
+    public LetterPrinter(char currentLetterForStart) {
+        this.currentLetterForStart = currentLetterForStart;
     }
 
     @SneakyThrows
     @Override
     public void run() {
+    }
+
+    @SneakyThrows
+    public void print(char inboundLetter, char nextLetter) {
+//        synchronized (this) {
         synchronized (lock) {
             for (int i = 0; i < NUMBER_OF_PRINTS; i++) {
-                while (startFromLetter != currentLetter) {
-                    log.info("{}. {} -> {}", startFromLetter, currentLetter, nextLetter);
+                while (currentLetterForStart != inboundLetter) {
+//                    log.info("{}. {} -> {}", currentLetterForStart, inboundLetter, nextLetter);
                     lock.wait();
                 }
-                log.info(String.valueOf(currentLetter));
-                currentLetter = nextLetter;
+//                log.info(String.valueOf(inboundLetter));
+//                Thread.sleep(100);
+                System.out.print(inboundLetter);
+                currentLetterForStart = nextLetter;
                 lock.notifyAll();
             }
         }
     }
+
 }
