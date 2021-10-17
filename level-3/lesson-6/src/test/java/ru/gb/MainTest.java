@@ -24,8 +24,8 @@ class MainTest {
 
     @ParameterizedTest
     @MethodSource("dataForCheckNewArrayAfter4")
-    void shouldReturnNewArrayAfterEndOf4(int[] array, int[] result) {
-        Assertions.assertArrayEquals(result, Main.newArrayAfter4(array));
+    void shouldReturnNewArrayAfterEndOf4(int[] numbers, int[] result) {
+        Assertions.assertArrayEquals(result, Main.newArrayAfter4(numbers));
     }
 
     @Test
@@ -36,5 +36,22 @@ class MainTest {
     @Test
     void throwExceptionIfArrayIsEmpty() {
         Assertions.assertThrows(RuntimeException.class, () -> Main.newArrayAfter4(new int[]{}));
+    }
+
+    public static Stream<Arguments> dataForCheckArrayHas1And4() {
+        List<Arguments> out = new ArrayList<>();
+        out.add(Arguments.arguments(new int[]{1, 2, 4, 4, 2, 3, 4, 1, 7}, true));
+        out.add(Arguments.arguments(new int[]{4, 4, 2}, false));
+        out.add(Arguments.arguments(new int[]{1}, false));
+        out.add(Arguments.arguments(new int[]{4, 1}, true));
+        out.add(Arguments.arguments(new int[]{}, false));
+
+        return out.stream();
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataForCheckArrayHas1And4")
+    void testCheckArrayHas1And4(int[] numbers, boolean result) {
+        Assertions.assertEquals(result, Main.isContains1And4(numbers));
     }
 }

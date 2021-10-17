@@ -25,4 +25,19 @@ public class Main {
 
 
     }
+
+    public static boolean isContains1And4(int[] numbers) {
+        boolean isContains1 = false;
+        boolean isContains4 = false;
+        for (int number : numbers) {
+            if (number == 1) {
+                isContains1 = true;
+            } else if (number == 4) {
+                isContains4 = true;
+            }
+            if (isContains4 && isContains1) return true;
+        }
+
+        return false;
+    }
 }
