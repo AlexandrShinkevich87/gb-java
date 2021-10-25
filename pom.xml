@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>level-3</module>
+        <module>level-2</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
